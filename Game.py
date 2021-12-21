@@ -17,7 +17,7 @@ CYAN = (0, 255, 255)
 bg_img = pygame.image.load('Images/background.jpg')
 
 # Define variables
-tileSize = 20
+tileSize = 10
 
 
 def drawGrid():

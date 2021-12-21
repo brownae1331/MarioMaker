@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 
-# Define some colors
+# Define colors
 BLACK = (0,   0,   0)
 WHITE = (255, 255, 255)
 RED = (255,   0,   0)
@@ -13,6 +13,20 @@ MAGENTA = (255, 0, 255)
 GREEN = (0, 255, 0)
 CYAN = (0, 255, 255)
 
+# Define images
+bg_img = pygame.image.load('Images/background.jpg')
+
+# Define variables
+tileSize = 20
+
+
+def drawGrid():
+    for line in range(0, screenWidth, tileSize):
+        pygame.draw.line(screen, WHITE, (0, line * tileSize),
+                         (screenWidth, line * tileSize))
+        pygame.draw.line(screen, WHITE, (line * tileSize, 0),
+                         (line * tileSize, screenHeight))
+
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, color, width, height):
@@ -22,14 +36,14 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def moveLeft(self):
-        if self.rect.x < 20:
-            self.rect.x = 20
+        if self.rect.x < 0:
+            self.rect.x = 0
         else:
             self.rect.x -= 5
 
     def moveRight(self):
-        if self.rect.x > 1900:
-            self.rect.x = 1900
+        if self.rect.x > 1580:
+            self.rect.x = 1580
         else:
             self.rect.x += 5
 
@@ -38,8 +52,8 @@ class Player(pygame.sprite.Sprite):
 spritesList = pygame.sprite.Group()
 
 # Size of screen
-screenWidth = 1920
-screenHeight = 1080
+screenWidth = 1600
+screenHeight = 800
 screen = pygame.display.set_mode([screenWidth, screenHeight])
 
 # Add the player
@@ -63,12 +77,18 @@ while not done:
         player.moveLeft()
     if key[pygame.K_RIGHT]:
         player.moveRight()
+
     spritesList.update()
 
-    # Draw the sprites on the screen
+    # Draw the background
+    screen.blit(bg_img, (0, 0))
+    drawGrid()
+
+    # Draw the sprites
     spritesList.draw(screen)
     pygame.display.flip()
     clock.tick(60)
     screen.fill(WHITE)
+
 
 pygame.quit()

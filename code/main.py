@@ -6,9 +6,6 @@ from player import Player
 
 pygame.init()
 
-# Define images
-bg_img = pygame.image.load('Images/background.jpg')
-
 # List of all sprits
 spritesList = pygame.sprite.Group()
 

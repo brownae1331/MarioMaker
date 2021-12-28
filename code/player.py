@@ -20,6 +20,8 @@ class Player(pygame.sprite.Sprite):
 
         # Player status
         self.status = 'idle'
+        self.facingRight = True
+        self.onGround = False
 
     def importCharacterAssets(self):
         characterPath = 'F:/GitHub/MarioMaker/graphics/character/'
@@ -37,24 +39,30 @@ class Player(pygame.sprite.Sprite):
         if self.frameIndex >= len(animation):
             self.frameIndex = 0
 
-        self.image = animation[int(self.frameIndex)]
+        image = animation[int(self.frameIndex)]
+        if self.facingRight:
+            self.image = image
+        else:
+            flippedImage = pygame.transform.flip(image, True, False)
+            self.image = flippedImage
 
     def getInput(self):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT]:
             self.direction.x = 1
+            self.facingRight = True
         elif keys[pygame.K_LEFT]:
             self.direction.x = -1
+            self.facingRight = False
         else:
             self.direction.x = 0
 
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] and self.onGround:
             self.jump()
 
     def getStatus(self):
-        print(self.direction.y)
-        if self.direction.y < 0 or self.direction.y > 0.800000000000000000001 or self.direction == 5.10702591327572e-15:
+        if self.direction.y < 0 or self.direction.y > 1:
             self.status = 'jump'
         else:
             if self.direction.x != 0:

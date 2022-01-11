@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
             self.jump()
 
     def getStatus(self):
-        if self.direction.y < 0 or self.direction.y > 1:
+        if self.onGround == False:
             self.status = 'jump'
         else:
             if self.direction.x != 0:

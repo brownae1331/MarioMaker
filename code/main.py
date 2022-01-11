@@ -28,7 +28,7 @@ while not done:
     spritesList.draw(screen)
     pygame.display.flip()
     clock.tick(60)
-    screen.fill(BLACK)
+    screen.fill('black')
 
 
 pygame.quit()

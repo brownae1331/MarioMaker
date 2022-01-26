@@ -24,8 +24,8 @@ class Player(pygame.sprite.Sprite):
         self.onGround = False
 
     def importCharacterAssets(self):
-        characterPath = 'F:/GitHub/MarioMaker/graphics/character/'
-        self.animations = {'idle': [], 'run': [], 'jump': [], 'fall': []}
+        characterPath = 'C:/Users/Andy/Documents/GitHub/MarioMaker/graphics/character'
+        self.animations = {'idle': [], 'run': [], 'jump': []}
 
         for animation in self.animations.keys():
             fullPath = characterPath + animation
